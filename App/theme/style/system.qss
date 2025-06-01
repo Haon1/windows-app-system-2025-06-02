@@ -1,0 +1,42 @@
+
+*
+{
+    font-size:18px;
+    font-weight:400;
+}
+
+QWidget#wdt_content
+{
+background-color:#e4efff;
+border-radius:3px;
+}
+
+CShadowBottomWidget
+{
+  min-height:85px;
+  max-height:85px;
+}
+
+CListWidget
+{
+    background-color: #ffffff;
+    border: none;
+	padding-top:10px;
+	padding-left:10px;
+	padding-right:10px;
+	border-radius:5px;
+}
+
+QStackedWidget
+{
+	background-color:#ffffff;
+	border-radius:5px;
+}
+
+CCommandButton
+{
+  min-width:120px;
+  max-width:120px;
+  min-height:56px;
+  max-height:56px;
+}
