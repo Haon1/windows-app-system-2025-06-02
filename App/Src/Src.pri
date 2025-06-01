@@ -22,6 +22,7 @@ HEADERS += \
     $$PWD/Common/Widget/CCommandButton.h \
     $$PWD/Common/Widget/CListWidget.h \
     $$PWD/Common/Widget/CShadowBottomWidget.h \
+    $$PWD/Common/Widget/CWarningDialog.h \
     $$PWD/Common/Widget/IWidgetCreator.h
 
 SOURCES += \
@@ -38,8 +39,10 @@ SOURCES += \
     $$PWD/Common/Widget/CCommandButton.cpp \
     $$PWD/Common/Widget/CListWidget.cpp \
     $$PWD/Common/Widget/CShadowBottomWidget.cpp \
+    $$PWD/Common/Widget/CWarningDialog.cpp \
     $$PWD/Common/Widget/IWidgetCreator.cpp
 
 FORMS += \
     $$PWD/CContentWidget/ContentWidget.ui \
-    $$PWD/CTopsView/TopsView.ui
+    $$PWD/CTopsView/TopsView.ui \
+    $$PWD/Common/Widget/WarningDialog.ui

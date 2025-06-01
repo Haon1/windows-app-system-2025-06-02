@@ -2,6 +2,7 @@
 #include "ui_ContentWidget.h"
 #include "CListWidget.h"
 #include "IWidgetCreator.h"
+#include "CWarningDialog.h"
 #include <QDebug>
 
 CContentWidget::CContentWidget(QWidget *parent)
@@ -107,6 +108,11 @@ void CContentWidget::SlotCurrentRowChanged(int iCurrentIndex)
         QWidget *p_Widget = CreatePage(m_s16TabIndex);
         m_pUi->stackedWidget->setCurrentWidget(p_Widget);
     }
+}
+
+void CContentWidget::showEvent(QShowEvent *)
+{
+
 }
 
 void CContentWidget::SetItemAlignment()

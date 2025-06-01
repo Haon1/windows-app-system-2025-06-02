@@ -24,7 +24,8 @@ protected:
         QColor clr_Background;
         QColor clr_Text = QColor("#ffffff");
 
-        if (option.state & QStyle::State_Selected)
+        if (option.state & QStyle::State_Selected ||
+                option.state & QStyle::State_HasFocus)
         {
             clr_Background = QColor("#0085ff");
         }

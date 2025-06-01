@@ -42,6 +42,9 @@ private:
 private slots:
     void SlotCurrentRowChanged(int iCurrentIndex);
 
+protected:
+    virtual void showEvent(QShowEvent *) Q_DECL_OVERRIDE;
+
 private:
     Ui::ContentWidget *m_pUi;
 

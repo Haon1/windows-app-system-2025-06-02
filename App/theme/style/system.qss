@@ -1,6 +1,7 @@
 
 *
 {
+    font-family: "Arial";
     font-size:18px;
     font-weight:400;
 }
@@ -39,4 +40,26 @@ CCommandButton
   max-width:120px;
   min-height:56px;
   max-height:56px;
+}
+
+QPushButton
+{
+  min-width:120px;
+  max-width:120px;
+  min-height:56px;
+  max-height:56px;
+  border:none;
+  border-radius:5px;
+  background-color:#409eff;
+  color:#ffffff;
+}
+
+QPushButton:hover 
+{
+  background-color: #66b1ff;
+}
+
+QPushButton:pressed
+{
+  background-color:#3a8ee6;
 }
