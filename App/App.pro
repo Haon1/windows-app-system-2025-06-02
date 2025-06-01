@@ -32,4 +32,7 @@ DISTFILES += \
     bin/config/systemconfig.xml
 
 RESOURCES += \
+    Image.qrc \
     Qss.qrc
+
+RC_ICONS = theme/icon/AppIcon.ico

@@ -28,7 +28,7 @@ protected:
         {
             clr_Background = QColor("#0085ff");
         }
-        else if (option.state & QStyle::State_Active)
+        else if (option.state & QStyle::State_Enabled)
         {
             clr_Background = QColor("#e4efff");
             clr_Text       = QColor("#000000");
