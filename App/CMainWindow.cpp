@@ -35,7 +35,7 @@ VOID CMainWindow::CreateContent()
 
     m_pTopStatusView = new CTopsView(this);             //×´Ì¬À¸
     m_pCenterWidget  = new CContentWidget(this);        //ÖĞĞÄ´°Ìå
-    m_pBottomWidget  = new CBottomBar(this);   //µ×²¿À¸
+    m_pBottomWidget  = new CBottomBar(this);            //µ×²¿À¸
 
     ver_Layout->addWidget(m_pTopStatusView);
     ver_Layout->addWidget(m_pCenterWidget);

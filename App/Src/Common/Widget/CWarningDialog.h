@@ -18,10 +18,13 @@ public:
 public:
     bool ShowWarningDialog();
     void MoveToParentCenter();
+
+protected:
+    virtual void showEvent(QShowEvent *) Q_DECL_OVERRIDE;
 private slots:
     void SlotBtnClicked();
 protected:
-//    virtual void resizeEvent(QResizeEvent *) Q_DECL_OVERRIDE;
+    virtual void resizeEvent(QResizeEvent *) Q_DECL_OVERRIDE;
 
 private:
     Ui::WarningDialog *m_pUi;

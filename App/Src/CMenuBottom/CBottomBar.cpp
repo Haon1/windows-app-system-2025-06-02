@@ -3,27 +3,35 @@
 #include "Global_Common.h"
 #include "ICommand.h"
 #include "CCommandButton.h"
+#include "CWarningDialog.h"
 
 CBottomBar::CBottomBar(QWidget *parent)
     : CShadowBottomWidget(parent)
     , m_pContentWidget(NULL)
 {
     setObjectName("bottom_bar");
-    m_listCmd.clear();
     InitWidget();
 }
 
 CBottomBar::~CBottomBar()
 {
     RELEASEIF(m_pContentWidget);
-    foreach (ICommand *cmd, m_listCmd)
+    for (UINT8 i = 0; i < m_listBtnInfo.count(); i++)
     {
-        RELEASEIF(cmd);
+        RELEASEIF(m_listBtnInfo[i].m_pCmd);
+        RELEASEIF(m_listBtnInfo[i].m_pBtn);
     }
-    foreach (CCommandButton *btn, m_listBtn)
+    RELEASEIF(m_pWarningDialog);
+}
+
+void CBottomBar::ShowWarningDialog(const QString &strText)
+{
+    if (!m_pWarningDialog)
     {
-        RELEASEIF(btn);
+        m_pWarningDialog = new CWarningDialog();
     }
+    m_pWarningDialog->SetText(strText);
+    m_pWarningDialog->ShowWarningDialog();
 }
 
 void CBottomBar::InitWidget()
@@ -63,6 +71,7 @@ void CBottomBar::InitWidget()
     };
     for (UINT8 i = 0; i < ARRAYSIZE(array); i++)
     {
+        //创建按钮
         CCommandButton *p_Btn = new CCommandButton(this);
         if (!p_Btn)
         {
@@ -72,7 +81,32 @@ void CBottomBar::InitWidget()
         p_Btn->SetCommand(array[i].p_Cmd);
         m_pHLayout->addWidget(p_Btn);
 
-        m_listBtn.push_back(p_Btn);
-        m_listCmd.push_back(array[i].p_Cmd);
+        //保存按钮和命令信息
+        stBtnInfo st_BtnInfo;
+        st_BtnInfo.m_pBtn = p_Btn;
+        st_BtnInfo.m_pCmd = array[i].p_Cmd;
+        m_listBtnInfo.push_back(st_BtnInfo);
+        //这里信号槽测试用，功能实现后不需要
+        connect(p_Btn, SIGNAL(SigClicked()), this, SLOT(SlotBtnClicked()));
+    }
+}
+
+void CBottomBar::SlotBtnClicked()
+{
+    QObject *p_Obj = sender();
+    if (!p_Obj)
+    {
+        return ;
+    }
+    for (UINT8 i = 0; i < m_listBtnInfo.count(); i++)
+    {
+        if (p_Obj == m_listBtnInfo.at(i).m_pBtn)
+        {
+            if (!m_listBtnInfo.at(i).m_pCmd)
+            {
+                //按钮命令为NULL则弹警告窗
+                ShowWarningDialog(QObject::tr("Command is nullptr!"));
+            }
+        }
     }
 }

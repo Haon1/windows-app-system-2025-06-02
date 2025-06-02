@@ -14,15 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#WarningDialog
-{
-  background-color: #ffffff;
-  border-radius:5px;
-  max-width:400;
-  min-width:400;
-  max-height:300;
-  min-height:300;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">

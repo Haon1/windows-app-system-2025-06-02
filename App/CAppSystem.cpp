@@ -4,6 +4,8 @@
 #include "CThread.h"
 #include "CTestHandler.h"
 #include "CDataCollectHandler.h"
+#include "CUiToolkit.h"
+
 #include <QDebug>
 
 CAppSystem *CAppSystem::m_pInstance = NULL;
@@ -18,6 +20,8 @@ VOID CAppSystem::CreateUi()
     if (!m_pMainWindow)
     {
         m_pMainWindow = new CMainWindow();
+        //保存主界面指针后续方便使用
+        g_UiToolkit->SaveMainWindowPtr(m_pMainWindow);
     }
     m_pMainWindow->show();
 }
@@ -87,7 +91,7 @@ VOID CAppSystem::Initialize()
 {
     g_SystemConfig; //加载系统配置
 
-//    CreateSysThread();  //创建线程
+//    CreateSysThread();  //创建多线程
     CreateUi();         //创建UI界面
 }
 

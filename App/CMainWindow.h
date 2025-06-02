@@ -21,7 +21,7 @@ private:
 private:
     CTopsView           *m_pTopStatusView;  //状态栏
     CContentWidget      *m_pCenterWidget;   //中间窗体
-    CBottomBar             *m_pBottomWidget;   //底部栏
+    CBottomBar          *m_pBottomWidget;   //底部栏
 };
 
 #endif // CMAINWINDOW_H

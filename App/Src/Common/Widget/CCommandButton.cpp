@@ -77,7 +77,7 @@ void CCommandButton::mouseMoveEvent(QMouseEvent *event)
         update();
     }
 }
-#include <QDebug>
+
 void CCommandButton::enterEvent(QEvent *)
 {
     m_blHaover = true;
