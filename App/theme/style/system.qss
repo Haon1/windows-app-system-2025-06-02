@@ -72,10 +72,17 @@ QWidget#WarningDialog
   max-height:300;
   min-height:300;
   
+  /*边框渐变*/
   border-bottom:2px solid #ffffff;
   border-bottom-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 rgba(0, 0, 0, 0.1));
   border-left:2px solid #ffffff;
   border-left-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 0.1), stop:1 #ffffff);
   border-right:2px solid #ffffff;
   border-right-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #ffffff, stop:1 rgba(0, 0, 0, 0.1));
+}
+
+QWidget#widget_title
+{
+  background-color:#5c97ee;
+  color:#ffffff;
 }

@@ -44,8 +44,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:#5c97ee;
-color:#ffffff;</string>
+      <string notr="true"/>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <property name="spacing">
@@ -159,14 +158,14 @@ color:#ffffff;</string>
       <item>
        <widget class="QPushButton" name="btn_cancel">
         <property name="text">
-         <string>cancel</string>
+         <string>Cancel</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="btn_ok">
         <property name="text">
-         <string>ok</string>
+         <string>Ok</string>
         </property>
        </widget>
       </item>
