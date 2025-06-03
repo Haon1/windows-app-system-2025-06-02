@@ -67,17 +67,17 @@ border:1px soild #0085ff;
         </property>
         <item>
          <property name="text">
-          <string>page1</string>
+          <string>Page1</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>page2</string>
+          <string>Page2</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>page3</string>
+          <string>Page3</string>
          </property>
         </item>
        </widget>

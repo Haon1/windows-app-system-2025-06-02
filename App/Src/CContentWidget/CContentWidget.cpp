@@ -24,6 +24,7 @@ CContentWidget::CContentWidget(QWidget *parent)
         m_listContentCreator.push_back(array_PagePointer[i]);
     }
 
+    SetCurrentIndex(0);
     //设置listWidget文本居中
     SetItemAlignment();
     connect(m_pUi->SideTab, SIGNAL(currentRowChanged(int)), this, SLOT(SlotCurrentRowChanged(int)));

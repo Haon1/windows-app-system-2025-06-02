@@ -121,7 +121,7 @@ void CCommandButton::paintEvent(QPaintEvent *)
 //    QFont font = painter.font();
 //    font.setPixelSize(20);
 //    font.setWeight(57);
-    painter.drawText(_rect, Qt::AlignCenter, m_strText);
+    painter.drawText(_rect, Qt::AlignCenter | Qt::TextWordWrap, m_strText);
 }
 
 void CCommandButton::SlotClicked()
