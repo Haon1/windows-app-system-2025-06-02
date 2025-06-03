@@ -58,7 +58,6 @@ protected:
 //        painter->setBrush(QBrush(clr_Background));
 //        painter->drawRoundedRect(_rect.adjusted(2,2,-2,-2), 4, 4);
 
-        qDebug() <<"cowwwwwwwwwwww" <<index.row();
         QColor clr_Background;
         QColor clr_Text = QColor("#ffffff");
         bool bl_IsDrawBorder = false;
@@ -68,21 +67,17 @@ protected:
         {
             clr_Background = m_clrHighLight;
             clr_Text       = m_clrTextSelected;
-            qDebug() << "111111111";
         }
         else if (option.state & QStyle::State_Selected)
         {
             clr_Background = m_clrSelected;
             clr_Text       = m_clrTextSelected;
-            qDebug() << "222222222";
         }
         else if (E_ITEM_STATE_NORMAL == index.data(ITEM_STATE))
         {
             clr_Background  = m_clrNormal;
             clr_Text        = m_clrTextNormal;
             bl_IsDrawBorder = true;
-
-            qDebug() << "333333333";
         }
 
         painter->setPen(Qt::NoPen);
