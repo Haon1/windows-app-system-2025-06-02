@@ -14,6 +14,7 @@ public:
     {
         E_ITEM_STATE_NORMAL = 0,    //常规状态
         E_ITEM_STATE_HIGHLIGHT,     //按压状态
+        E_ITEM_STATE_HOVER,         //鼠标悬停
     };
 
     CListWidgetItemDelegate(QObject *parent = nullptr)
@@ -38,27 +39,10 @@ protected:
                                const QModelIndex &index) const override
     {
         painter->setRenderHint(QPainter::Antialiasing);
-        QRect _rect = option.rect.adjusted(5, 0, -5, -10);
-        QString str_Text = index.data().toString();
+        QRect _rect = option.rect.adjusted(5, 0, -5, -10);  //矩形
+        QString str_Text = index.data().toString();         //文本
 
-//        QColor clr_Background;
-//        QColor clr_Text = QColor("#ffffff");
-
-//        if (option.state & QStyle::State_Selected ||
-//                option.state & QStyle::State_HasFocus)
-//        {
-//            clr_Background = QColor("#0085ff");
-//        }
-//        else if (option.state & QStyle::State_Enabled)
-//        {
-//            clr_Background = QColor("#e4efff");
-//            clr_Text       = QColor("#000000");
-//        }
-//        painter->setPen(Qt::NoPen);
-//        painter->setBrush(QBrush(clr_Background));
-//        painter->drawRoundedRect(_rect.adjusted(2,2,-2,-2), 4, 4);
-
-        QColor clr_Background;
+        QColor clr_Background;  //背景色
         QColor clr_Text = QColor("#ffffff");
         bool bl_IsDrawBorder = false;
         if (E_ITEM_STATE_HIGHLIGHT == index.data(ITEM_STATE)
@@ -68,16 +52,26 @@ protected:
             clr_Background = m_clrHighLight;
             clr_Text       = m_clrTextSelected;
         }
-        else if (option.state & QStyle::State_Selected)
+        else if (E_ITEM_STATE_HOVER == index.data(ITEM_STATE)
+            && (option.state & QStyle::State_Enabled)
+            && (index.flags() & Qt::ItemIsSelectable))
         {
             clr_Background = m_clrSelected;
             clr_Text       = m_clrTextSelected;
         }
-        else if (E_ITEM_STATE_NORMAL == index.data(ITEM_STATE))
+        else
         {
-            clr_Background  = m_clrNormal;
-            clr_Text        = m_clrTextNormal;
-            bl_IsDrawBorder = true;
+            if (option.state & QStyle::State_Selected)  //选中（当前行）
+            {
+                       clr_Background = m_clrSelected;
+                       clr_Text       = m_clrTextSelected;
+            }
+            else    //常规状态E_ITEM_STATE_NORMAL == index.data(ITEM_STATE)
+            {
+                clr_Background  = m_clrNormal;
+                clr_Text        = m_clrTextNormal;
+                bl_IsDrawBorder = true;
+            }
         }
 
         painter->setPen(Qt::NoPen);
@@ -179,16 +173,36 @@ void CListWidget::mouseReleaseEvent(QMouseEvent *event)
         return ;
     }
     ClearHighLight();
-//    QPoint pos = event->pos();
-//    QListWidgetItem *p_Item = itemAt(pos);
-//    if (p_Item && (p_Item->flags() & Qt::ItemIsSelectable))
-//    {
-//        int r = row(p_Item);
-//        if (r != -1 && GetClickedId() == r)
-//        {
-//            setCurrentRow(r);
-//        }
-//    }
+    QPoint pos = event->pos();
+    QListWidgetItem *p_Item = itemAt(pos);
+    if (p_Item && (p_Item->flags() & Qt::ItemIsSelectable))
+    {
+        int r = row(p_Item);
+        if (r != -1 && GetClickedId() == r)
+        {
+            setCurrentRow(r);
+        }
+    }
+}
+
+void CListWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    if (!event)
+    {
+        return ;
+    }
+    QPoint pos = event->pos();
+    QListWidgetItem *p_Item = itemAt(pos);
+    if (p_Item && (p_Item->flags() & Qt::ItemIsSelectable))
+    {
+        ProcessHover(row(p_Item));
+    }
+}
+
+void CListWidget::leaveEvent(QEvent */*event*/)
+{
+    ClearHighLight();
+    SetClickedId(-1);
 }
 
 void CListWidget::resizeEvent(QResizeEvent *event)
@@ -199,7 +213,6 @@ void CListWidget::resizeEvent(QResizeEvent *event)
         this->item(i)->setSizeHint(m_sizeItemSize);
         this->item(i)->setTextAlignment(Qt::AlignCenter);
     }
-    ClearHighLight();
 
     QListWidget::resizeEvent(event);
 }
@@ -212,6 +225,22 @@ void CListWidget::ProcessHighLight(int iHighLightRow)
         if (i == iHighLightRow)
         {
             p_Item->setData(CListWidgetItemDelegate::ITEM_STATE, CListWidgetItemDelegate::E_ITEM_STATE_HIGHLIGHT);
+        }
+        else
+        {
+            p_Item->setData(CListWidgetItemDelegate::ITEM_STATE, CListWidgetItemDelegate::E_ITEM_STATE_NORMAL);
+        }
+    }
+}
+
+void CListWidget::ProcessHover(int iHoverRow)
+{
+    for (int i = 0; i < this->count(); i++)
+    {
+        QListWidgetItem *p_Item = item(i);
+        if (i == iHoverRow)
+        {
+            p_Item->setData(CListWidgetItemDelegate::ITEM_STATE, CListWidgetItemDelegate::E_ITEM_STATE_HOVER);
         }
         else
         {
